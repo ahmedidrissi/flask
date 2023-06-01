@@ -1,8 +1,174 @@
-{% extends "base.html" %}
-{% block title %}contact{% endblock %}
+{% extends 'base.html' %}
+
+{% block title %}
+    Contact Page
+{% endblock %}
+
 {% block content %}
-    <h1>contact</h1>
-    <p>Welcome to our application's contact page!</p>
-    <p>fjbgjfnofkjhofojkbmfdhjoihk.</p>
-    
+    <style>
+        body {
+        background-color: #1B1452; /* Set your desired background color here */
+        background-image: url("./static/contatct.png");
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: top right;
+    }
+        .contact1 {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .contact1-form-wrapper {
+            width: 80%;
+            display: flex;
+            justify-content: flex-start; /* Updated */
+            align-items: flex-start; /* Updated */
+        }
+        .contact1-form {
+            width: 50%;
+            background-color: #fff;
+            padding: 45px;
+            border-radius: 10px;
+            box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+        }
+        .contact1-form-title {
+            display: block;
+            font-size: 30px;
+            color: #333333;
+            line-height: 1.2;
+            text-align: center;
+            padding-bottom: 30px;
+        }
+        .wrap-input1 {
+            position: relative;
+            width: 100%;
+            z-index: 1;
+            margin-bottom: 20px;
+        }
+        .input1 {
+            font-family: inherit;
+            width: 100%;
+            border: 1px solid #e6e6e6;
+            border-radius: 5px;
+            padding: 10px;
+            background: transparent;
+        }
+        .shadow-input1 {
+            position: absolute;
+            display: block;
+            width: 100%;
+            height: 100%;
+            border-radius: 5px;
+            box-shadow: 0 0 0 0;
+            opacity: 0.5;
+            transition: all 0.3s;
+        }
+        .input1:focus + .shadow-input1 {
+            box-shadow: 0 0 8px 0px rgba(0, 0, 0, 0.1);
+        }
+        .container-contact1-form-btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-top: 20px;
+        }
+        .contact1-form-btn {
+            display: inline-block;
+            font-family: inherit;
+            font-size: 16px;
+            color: #fff;
+            line-height: 1.2;
+            text-transform: uppercase;
+            padding: 10px 20px;
+            background-color: #5396c9;
+            border-radius: 5px;
+            transition: all 0.4s;
+            cursor: pointer;
+        }
+        .contact1-form-btn:hover {
+            background-color: #5396c9;
+        }
+        .contact1-image img {
+            width: 100%; /* Updated */
+            display: flex; /* Updated */
+            justify-content: flex-end; /* Updated */
+            align-items: center; /* Updated */
+        }
+        .message-container {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: #fff;
+            border-radius: 5px;
+        }
+    </style>
+
+    <div class="contact1">
+        <div class="contact1-form-wrapper">
+            <div class="contact1-form">
+                <form id="contact-form">
+                    <span class="contact1-form-title">
+                        Get in touch !
+                    </span>
+
+                    <div class="wrap-input1 validate-input" data-validate="Name is required">
+                        <input class="input1" type="text" name="name" placeholder="Name">
+                        <span class="shadow-input1"></span>
+                    </div>
+
+                    <div class="wrap-input1 validate-input" data-validate="Valid email is required: ex@abc.xyz">
+                        <input class="input1" type="text" name="email" placeholder="Email">
+                        <span class="shadow-input1"></span>
+                    </div>
+
+                    <div class="wrap-input1 validate-input" data-validate="Subject is required">
+                        <input class="input1" type="text" name="subject" placeholder="Subject">
+                        <span class="shadow-input1"></span>
+                    </div>
+
+                    <div class="wrap-input1 validate-input" data-validate="Message is required">
+                        <textarea class="input1" name="message" placeholder="Message"></textarea>
+                        <span class="shadow-input1"></span>
+                    </div>
+
+                    <div class="container-contact1-form-btn">
+                        <button class="contact1-form-btn" type="submit">
+                            <span>
+                                Send Email
+                            </span>
+                        </button>
+                    </div>
+
+                    <div class="message-container" id="message-container"></div>
+                </form>
+            </div>
+            
+        </div>
+    </div>
+
+<script>
+    var contactForm = document.getElementById("contact-form");
+    contactForm.addEventListener("submit", function(event) {
+        event.preventDefault();
+        showMessage();
+        clearForm();
+    });
+
+    function showMessage() {
+        var messageContainer = document.getElementById("message-container");
+        messageContainer.style.display = "block";
+        messageContainer.textContent = "Message sent!";
+    }
+
+    function clearForm() {
+        var formInputs = document.getElementsByClassName("input1");
+        for (var i = 0; i < formInputs.length; i++) {
+            formInputs[i].value = "";
+        }
+    }
+</script>
 {% endblock %}
