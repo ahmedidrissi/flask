@@ -63,7 +63,24 @@ def map_view():
 
     first_stop = request.form["first-stop"]
     final_stop = request.form["final-stop"]
-    intermediate_stops = [request.form["stop-2"],]
+    intermediate_stops = []
+    if request.form.get("stop-2"):
+        intermediate_stops.append(request.form["stop-2"])
+    if request.form.get("stop-3"):
+        intermediate_stops.append(request.form["stop-3"])
+    if request.form.get("stop-4"):
+        intermediate_stops.append(request.form["stop-4"])
+    if request.form.get("stop-5"):
+        intermediate_stops.append(request.form["stop-5"])
+    if request.form.get("stop-6"):
+        intermediate_stops.append(request.form["stop-6"])
+    if request.form.get("stop-7"):
+        intermediate_stops.append(request.form["stop-7"])
+    if request.form.get("stop-8"):
+        intermediate_stops.append(request.form["stop-8"])
+    if request.form.get("stop-9"):
+        intermediate_stops.append(request.form["stop-9"])
+
 
     # Retrieve the coordinates based on the selected stops
     coordinates = retrieve_coordinates(first_stop, final_stop, intermediate_stops)
