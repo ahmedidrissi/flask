@@ -30,26 +30,24 @@
 
         var waypoints_ = [];
         document.addEventListener('DOMContentLoaded', function() {
-            var coordinates = JSON.parse('{{ coordinates|safe }}');
-            for (var key in coordinates) {
-                waypoints_.push(L.latLng(coordinates[key][0], coordinates[key][1]));
-            }
-            
-        });
-    
-        console.log(waypoints_);
+        var coordinates = JSON.parse('{{ coordinates|safe }}');
+        for (var key in coordinates) {
+        waypoints_.push(L.latLng(coordinates[key][0], coordinates[key][1]));
+    }
 
+    console.log(waypoints_);
 
-        var control = L.Routing.control({
-            waypoints: waypoints_,
-            router: L.Routing.osrmv1({
-                serviceUrl: 'https://router.project-osrm.org/route/v1'
-            }),
-            lineOptions: {
-                styles: [{color: 'red', opacity: 1, weight: 5}]
-            },
-            show: false
-        }).addTo(map);
+    var control = L.Routing.control({
+        waypoints: waypoints_,
+        router: L.Routing.osrmv1({
+            serviceUrl: 'https://router.project-osrm.org/route/v1'
+        }),
+        lineOptions: {
+            styles: [{color: 'red', opacity: 1, weight: 5}]
+        },
+        show: false
+    }).addTo(map);
+});
     </script>
 </body>
 </html>
