@@ -80,6 +80,8 @@ def map_view():
         intermediate_stops.append(request.form["stop-8"])
     if request.form.get("stop-9"):
         intermediate_stops.append(request.form["stop-9"])
+    if request.form.get("stop-10"):
+        intermediate_stops.append(request.form["stop-10"])
 
 
     # Retrieve the coordinates based on the selected stops
