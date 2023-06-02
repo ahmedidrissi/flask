@@ -19,30 +19,29 @@
 <body>
     <div id="map"></div>
     <script>
+       
+
         var map = L.map('map').setView([34.0181, -6.8355], 13);
-    
+
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
             attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
         }).addTo(map);
+
+        var waypoints_ = [];
+        document.addEventListener('DOMContentLoaded', function() {
+            var coordinates = JSON.parse('{{ coordinates|safe }}');
+            for (var key in coordinates) {
+                waypoints_.push(L.latLng(coordinates[key][0], coordinates[key][1]));
+            }
+            
+        });
     
-        var coordinates = JSON.parse('{{ coordinates|safe }}');
-    
-        // Clear previous markers
-        L.layerGroup().clearLayers();
-    
-        // Add markers for the retrieved coordinates
-        for (var i = 0; i < coordinates.length; i++) {
-            L.marker([coordinates[i][0], coordinates[i][1]]).addTo(map);
-        }
-    
-        var waypoints = [];
-        for (var i = 0; i < coordinates.length; i++) {
-            waypoints.push(L.latLng(coordinates[i][0], coordinates[i][1]));
-        }
-    
+        console.log(waypoints_);
+
+
         var control = L.Routing.control({
-            waypoints: waypoints,
+            waypoints: waypoints_,
             router: L.Routing.osrmv1({
                 serviceUrl: 'https://router.project-osrm.org/route/v1'
             }),
@@ -52,6 +51,5 @@
             show: false
         }).addTo(map);
     </script>
-    
 </body>
 </html>

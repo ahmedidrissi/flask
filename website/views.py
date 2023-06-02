@@ -9,11 +9,10 @@ views = Blueprint('views', __name__)
 @views.route('/', methods=['GET', 'POST'])
 @login_required
 def home():
-    if request.method == 'GET':
+    if request.method == 'POST':
         first_stop = request.form.get('first-stop')
         final_stop = request.form.get('final-stop')
         intermediate_stops = request.form.getlist('stop-2')
-        print(final_stop)
 
         # Process the selected stops and redirect to the map route
         return redirect(url_for('views.map_view', first_stop=first_stop, final_stop=final_stop, intermediate_stops=intermediate_stops))
@@ -55,18 +54,22 @@ def get_coordinates():
     # Return the coordinates as JSON
     return jsonify(coordinates)
 
-@views.route('/map')
+@views.route('/map', methods=['GET', 'POST'])
 def map_view():
+    """ 
     first_stop = request.args.get('first_stop')
     final_stop = request.args.get('final_stop')
-    intermediate_stops = request.args.getlist('intermediate_stops')
+    intermediate_stops = request.args.getlist('intermediate_stops') """
+
+    first_stop = request.form["first-stop"]
+    final_stop = request.form["final-stop"]
+    intermediate_stops = [request.form["stop-2"],]
 
     # Retrieve the coordinates based on the selected stops
     coordinates = retrieve_coordinates(first_stop, final_stop, intermediate_stops)
 
     # Convert coordinates to JSON
     coordinates_json = json.dumps(coordinates)
-    print(coordinates_json)
 
     return render_template('map.html', coordinates=coordinates_json)
 

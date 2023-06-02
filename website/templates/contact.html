@@ -5,14 +5,22 @@
 {% endblock %}
 
 {% block content %}
-    <style>
+<style>
+    html, body {
+            height: 100%;
+            margin: 0;
+        }
+
         body {
-        background-color: #1B1452; /* Set your desired background color here */
-        background-image: url("./static/contatct.png");
-        background-repeat: no-repeat;
-        background-size: contain;
-        background-position: top right;
-    }
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #1B1452; /* Set your desired background color here */
+            background-image: url("./static/contatct.png");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+        }
         .contact1 {
             width: 100%;
             height: 100vh;

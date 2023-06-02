@@ -3,9 +3,12 @@
 {% block content %}
 
 <style>
-    body{
-      background-color: #1B1452;
-      
+    body {
+      margin: 0;
+      padding: 0;
+      background-image: url(./static/form.png);
+      background-repeat: no-repeat;
+      background-size: cover;
     }
     /* Form styles */
     form {
@@ -79,7 +82,7 @@
     }
   </style>
   
-  <form action="/map" method="GET">
+  <form action="/map" method="POST">
     <label for="first-stop">First Stop:</label>
     <select id="first-stop" name="first-stop" required>
       <option value="" selected disabled>Select a pharmacy</option>

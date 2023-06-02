@@ -2,7 +2,7 @@ import pandas as pd
 import sqlite3
 
 # Specify the path to the Excel file
-excel_file_path = './website/pharmacies.xlsx'
+excel_file_path = './pharmacies.xlsx'
 
 # Read the Excel file into a DataFrame
 data_frame = pd.read_excel(excel_file_path)
