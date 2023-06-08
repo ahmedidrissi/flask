@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, request, flash, jsonify, redirect,
 from flask_login import login_required, current_user
 import sqlite3
 import json
+from TSP_MASTER import TSP_Solver
 
 
 views = Blueprint('views', __name__)
@@ -90,7 +91,44 @@ def map_view():
     # Convert coordinates to JSON
     coordinates_json = json.dumps(coordinates)
 
+    f = open("output.txt","w",encoding="UTF-8")
+    f.write(coordinates_json)
+    f.write("\n")
+    #what to change
+
+    pharmacies_tuples = []
+    for key in coordinates:
+        pharmacies_tuples.append(coordinates[key])
+
+    omptimal = TSP_Solver(pharmacies_tuples,0)[1]
+    
+
+    coordinates = order_dictionary(coordinates,omptimal)
+
+    l = []
+    for key in coordinates:
+        l.append(key)
+
+    coordinates[l[0]+"2"] = coordinates[l[0]]
+
+    coordinates_json = json.dumps(coordinates)
+    
+    f = open("last_output.txt","w",encoding="UTF-8")
+    f.write(coordinates_json)
+    f.close
     return render_template('map.html', coordinates=coordinates_json)
+
+
+def order_dictionary(dictionary, order):
+    ordered_dict = {}
+    for index in order:
+        key = list(dictionary.keys())[index]
+        value = dictionary[key]
+        ordered_dict[key] = value
+    return ordered_dict
+
+
+
 
 
 
@@ -133,6 +171,10 @@ def retrieve_pharmacies():
 
     # Return the list of pharmacies
     return pharmacies
+
+
+
+
 
 
 @views.route('/about')

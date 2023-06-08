@@ -1,0 +1,1 @@
+{"Pharmacie El Hamd": [33.979764, -6.85488], "Pharmacie Al-Yassamine": [33.982154, -6.861346], "Pharmacie Al-Nasr": [33.990717, -6.876518]}
